@@ -25,38 +25,43 @@ random_rest = random.choice(rest_list)
 random_trans = random.choice(trans_list)
 random_ent = random.choice(ent_list)
 
+
 def confirm_trip_details():
-    user_choice = input("Are you satisfied with your itenerary? Y or N - ")
-    if user_choice == "Y":
-        print("Great! You're going to " + random_dest + ", eating at " + random_rest + ", and you'll be arriving by " + random_trans + ". Enjoy your time with " + random_ent +"!")
-    elif user_choice == "N":
-        reselect_option()
-    else:
-        print("Input invalid.")
-        confirm_trip_details()
+    user_choice = "N"
+    while user_choice.upper() != "Y":
+        user_choice = input("Are you satisfied with your itenerary? Y or N - ")
+        if user_choice.upper() == "Y":
+            print("Great! You're going to " + random_dest + ", eating at " + random_rest + ", and you'll be arriving by " + random_trans + ". Enjoy your time with " + random_ent +"!")
+        elif user_choice.upper() == "N":
+            reselect_option()
+        else:
+            print("Input invalid.")
+        
 
 def reselect_option():
-    to_change = input("What would you like to change? ")
-    if to_change.lower() == "destination":
-       global random_dest
-       dest_list.remove(random_dest)
-       random_dest = random.choice(dest_list)
-    elif to_change.lower() == "restaurant":
-        global random_rest
-        rest_list.remove(random_rest)
-        random_rest = random.choice(rest_list)
-    elif to_change.lower() == "transportation":
-        global random_trans
-        trans_list.remove(random_trans)
-        random_trans = random.choice(trans_list)
-    elif to_change.lower() == "entertainment":
-        global random_ent
-        ent_list.remove(random_ent)
-        random_ent = random.choice(ent_list)
-    else:
-        print("Input invalid")
-        reselect_option()
+    to_change = ""
+    while to_change.lower() != "destination" and to_change.lower() != "restaurant" and to_change.lower() != "transportation" and to_change.lower() != "entertainment":
+        to_change = input("What would you like to change? ")
+        if to_change.lower() == "destination":
+            global random_dest
+            dest_list.remove(random_dest)
+            random_dest = random.choice(dest_list)
+        elif to_change.lower() == "restaurant":
+            global random_rest
+            rest_list.remove(random_rest)
+            random_rest = random.choice(rest_list)
+        elif to_change.lower() == "transportation":
+            global random_trans
+            trans_list.remove(random_trans)
+            random_trans = random.choice(trans_list)
+        elif to_change.lower() == "entertainment":
+            global random_ent
+            ent_list.remove(random_ent)
+            random_ent = random.choice(ent_list)
+        else:
+            print("Input invalid")
     print_full_trip()
-    confirm_trip_details()
+
+ 
 
 run_day_trip_generator()
